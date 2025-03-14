@@ -1,6 +1,14 @@
 import React from "react";
-import { FaFacebook, FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { IoIosSend } from "react-icons/io";
+
+
+//  Footer Component
+//  This component displays the footer section of the website, including:
+//  A brief introduction about EhsanDev
+//  Contact details
+//  Newsletter subscription form
+//  Social media links
 
 const Footer = () => {
   return (
@@ -44,7 +52,6 @@ const Footer = () => {
             </div>
 
             <div className="flex space-x-4 mt-6">
-              <FaFacebook className="cursor-pointer text-gray-400 hover:text-teal-400 border border-gray-400 rounded-full p-1 w-8 h-8" />
               <a
                 href="https://www.linkedin.com/in/ehsan-iqbal-549b112b7"
                 target="_blank"

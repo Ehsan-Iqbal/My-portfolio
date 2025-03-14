@@ -8,18 +8,21 @@ import react5 from "../assets/Images/react5.png";
 import react6 from "../assets/Images/react6.jpeg";
 
 const Work = () => {
+  // State to manage the list of portfolio images
   const [portfolioImages, setPortfolioImages] = useState([
     react1,
     react2,
     react3,
     react4,
     react5,
-    react6, 
+    react6,
   ]);
 
+  // State to track whether the grid is hovered (for showing delete buttons)
   const [isGridHovered, setIsGridHovered] = useState(false);
 
-  // Image upload
+  //  Function to handle image uploads.
+
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -27,13 +30,14 @@ const Work = () => {
       setPortfolioImages((prevImages) => {
         const updatedImages = [...prevImages];
         const react6Index = updatedImages.indexOf(react6);
-        updatedImages.splice(react6Index, 0, imageUrl); 
+        updatedImages.splice(react6Index, 0, imageUrl);
         return updatedImages;
       });
     }
   };
 
-  // Image delete
+  // Function to delete an image from the portfolio list.
+
   const handleDeleteImage = (indexToDelete) => {
     setPortfolioImages((prevImages) =>
       prevImages.filter((_, index) => index !== indexToDelete)
@@ -47,9 +51,11 @@ const Work = () => {
         We Offer Great Affordable Premium Prices
       </h2>
       <p className="text-gray-600 mt-3 max-w-2xl mx-auto text-sm md:text-base">
-      Showcasing expertise in React.js with clean, responsive designs & high-performance web applications.
+        Showcasing expertise in React.js with clean, responsive designs &
+        high-performance web applications.
       </p>
 
+      {/* Image Grid */}
       <div
         className="grid grid-cols-3 gap-6 mt-12 px-12"
         onMouseEnter={() => setIsGridHovered(true)}
@@ -57,6 +63,7 @@ const Work = () => {
       >
         {portfolioImages.map((image, index) => (
           <div key={index} className="relative group">
+            {/* Show delete button when hovering over the grid */}
             {isGridHovered && image !== react6 && (
               <button
                 onClick={() => handleDeleteImage(index)}
@@ -66,6 +73,7 @@ const Work = () => {
               </button>
             )}
 
+            {/* Last image (react6) is used as an upload button */}
             {image === react6 ? (
               <label className="cursor-pointer">
                 <input

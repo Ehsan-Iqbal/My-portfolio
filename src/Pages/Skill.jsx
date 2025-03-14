@@ -1,23 +1,16 @@
 import { useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
-import skill from "../assets/images/ppppp.jpeg";
+import skill from "../assets/images/christopher-gower-m_HRfLhgABo-unsplash.jpg";
+import { defaultSkills } from "../Components/utills/const"; 
 
 const Skills = () => {
-  const [skills, setSkills] = useState([
-    "HTML",
-    "CSS",
-    "Bootstrap",
-    "Tailwind",
-    "JS",
-    "React.JS",
-  ]);
+  const [skills, setSkills] = useState(defaultSkills); 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalMode, setModalMode] = useState("add"); 
+  const [modalMode, setModalMode] = useState("add");
   const [currentSkill, setCurrentSkill] = useState("");
   const [editIndex, setEditIndex] = useState(null);
 
-  // Open Add/Edit Modal
   const handleOpenModal = (mode, skill = "", index = null) => {
     setIsModalOpen(true);
     setModalMode(mode);
@@ -25,14 +18,12 @@ const Skills = () => {
     setEditIndex(index);
   };
 
-  // Close Modal
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setCurrentSkill("");
     setEditIndex(null);
   };
 
-  // Add New Skill
   const handleAddSkill = () => {
     if (currentSkill.trim() !== "") {
       setSkills([...skills, currentSkill.trim()]);
@@ -40,7 +31,6 @@ const Skills = () => {
     }
   };
 
-  // Edit 
   const handleEditSkill = () => {
     if (currentSkill.trim() !== "" && editIndex !== null) {
       setSkills((prevSkills) =>
@@ -52,7 +42,6 @@ const Skills = () => {
     }
   };
 
-  // Delete Skill
   const handleDeleteSkill = (indexToDelete) => {
     setSkills((prevSkills) =>
       prevSkills.filter((_, index) => index !== indexToDelete)
@@ -68,8 +57,8 @@ const Skills = () => {
           I Am Expert In
         </h2>
         <p className="text-gray-600 tracking-wide">
-        I specialize in React.js, JavaScript, and Tailwind CSS, building responsive and interactive web applications.
-        Experienced in frontend development and performance optimization.
+          I specialize in React.js, JavaScript, and Tailwind CSS, building
+          responsive and interactive web applications.
         </p>
 
         {/* Skills List */}
@@ -86,13 +75,13 @@ const Skills = () => {
               {/* Edit & Delete Buttons on Hover */}
               <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button
-                  className="bg-yellow-500 text-white p-1 rounded-full"
+                  className="bg-yellow-500 text-white p-1 rounded-full cursor-pointer"
                   onClick={() => handleOpenModal("edit", skill, index)}
                 >
                   <MdEdit size={14} />
                 </button>
                 <button
-                  className="bg-red-600 text-white p-1 rounded-full"
+                  className="bg-red-600 text-white p-1 rounded-full cursor-pointer"
                   onClick={() => handleDeleteSkill(index)}
                 >
                   <MdDelete size={14} />
@@ -101,15 +90,6 @@ const Skills = () => {
             </div>
           ))}
 
-          {/* Add Button */}
-          <button
-            onClick={() => handleOpenModal("add")}
-            className="w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center 
-              bg-gray-300 text-gray-700 text-md font-bold rounded-full shadow-lg 
-              hover:bg-gray-400 transition"
-          >
-            + Add skill
-          </button>
         </div>
       </div>
 
@@ -119,7 +99,7 @@ const Skills = () => {
           <img
             src={skill}
             alt="Profile"
-            className="w-full h-auto object-cover rounded-full"
+            className="w-[550px] h-[470px] object-cover rounded-full p-4"
           />
         </div>
       </div>

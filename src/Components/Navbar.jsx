@@ -1,147 +1,113 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import ContactForm from "../Components/UI/ContactForm";
+import { FaWhatsapp } from "react-icons/fa";
 
-export default function Navbar() {
+export default function Navbar({ onNavClick }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  const menuItems = ["home", "about", "services", "skill", "work", "Contact"];
+
+  const handleNavClick = (item) => {
+    onNavClick(item);
+    setIsOpen(false); // Close mobile menu on click
+  };
+
+  // WhatsApp Message Function
+  const handleBuy = () => {
+    const phoneNumber = "+923055970580"; // Replace with your WhatsApp number
+    const message = encodeURIComponent(
+      `Hello, I am interested in your services! Can you provide me with more details?`
+    );
+    const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
+    window.open(url, "_blank");
+  };
 
   return (
-    <nav className="bg-white shadow-md fixed w-full top-0 left-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
-        <div className="flex justify-between items-center px-[40px] py-5">
-          <div className="text-2xl font-bold text-teal-900 flex items-center">
-            <span className="mr-1">EhsanDev</span>
-          </div>
+    <>
+      <nav className="bg-white shadow-md fixed w-full top-0 left-0 z-50">
+        <div className="max-w-[1175px] mx-auto px-6">
+          <div className="flex justify-between items-center py-5">
+            {/* Brand Name */}
+            <div className="text-2xl font-bold text-teal-900">EhsanDev</div>
 
-          <div className="lg:hidden">
+            {/* Mobile Menu Button */}
+            <div className="lg:hidden">
+              <button onClick={() => setIsOpen(!isOpen)} className="text-teal-900">
+                {isOpen ? <X size={28} /> : <Menu size={28} />}
+              </button>
+            </div>
+
+            {/* Desktop Navigation */}
+            <ul className="hidden lg:flex space-x-8 text-teal-600 font-medium">
+              {menuItems.map((item) => (
+                <li key={item}>
+                  <button onClick={() => onNavClick(item)} className="hover:text-teal-800 focus:text-black cursor-pointer">
+                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                  </button>
+                </li>
+              ))}
+            </ul>
+
+            {/* LET'S TALK Button */}
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-teal-900 focus:outline-none"
+              className="hidden lg:block bg-gray-900 text-white font-semibold px-6 py-2.5 rounded-full hover:bg-teal-700 transition"
+              onClick={() => setIsFormVisible(true)} // Open Contact Form
             >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+              LET'S TALK
             </button>
           </div>
-
-          <ul className="hidden lg:flex space-x-10 text-teal-600 font-medium">
-            <li>
-              <Link to="/" className="hover:text-teal-800 focus:text-black">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/about"
-                className="hover:text-teal-800 focus:text-black"
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/services"
-                className="hover:text-teal-800 focus:text-black"
-              >
-                Services
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/skill"
-                className="hover:text-teal-800 focus:text-black"
-              >
-                Skill
-              </Link>
-            </li>
-            <li>
-              <Link to="/work" className="hover:text-teal-800 focus:text-black">
-                Work
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/testimonial"
-                className="hover:text-teal-800 focus:text-black"
-              >
-                Contact
-              </Link>
-            </li>
-          </ul>
-
-          <button className="hidden lg:block bg-gray-900 text-white font-semibold px-8 py-2.5 rounded-full hover:bg-teal-700 transition cursor-pointer">
-            LETS TALK
-          </button>
         </div>
+
+        {/* Mobile Navigation (Collapsible) */}
+        {isOpen && (
+          <div className="lg:hidden bg-white border-t border-gray-200">
+            <ul className="flex flex-col items-center py-4 space-y-4 text-teal-600 font-medium">
+              {menuItems.map((item) => (
+                <li key={item}>
+                  <button onClick={() => handleNavClick(item)} className="hover:text-teal-800">
+                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                  </button>
+                </li>
+              ))}
+              {/* LET'S TALK Button in Mobile Menu */}
+              <li>
+                <button
+                  className="bg-gray-900 text-white font-semibold px-6 py-2.5 rounded-full hover:bg-teal-700 transition"
+                  onClick={() => setIsFormVisible(true)} // Open Contact Form
+                >
+                  LET'S TALK
+                </button>
+              </li>
+            </ul>
+          </div>
+        )}
+      </nav>
+
+      {/* WhatsApp Floating Button */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <button
+          onClick={handleBuy} // Redirect to WhatsApp
+          className="bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition"
+        >
+          <FaWhatsapp size={28} />
+        </button>
       </div>
 
-      {isOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-200">
-          <ul className="flex flex-col items-center py-4 space-y-4 text-teal-600 font-medium">
-            <li>
-              <Link
-                to="/"
-                className="hover:text-teal-800"
-                onClick={() => setIsOpen(false)}
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/about"
-                className="hover:text-teal-800"
-                onClick={() => setIsOpen(false)}
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/services"
-                className="hover:text-teal-800"
-                onClick={() => setIsOpen(false)}
-              >
-                Services
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/skill"
-                className="hover:text-teal-800"
-                onClick={() => setIsOpen(false)}
-              >
-                Skill
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/work"
-                className="hover:text-teal-800"
-                onClick={() => setIsOpen(false)}
-              >
-                Work
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/pricing"
-                className="hover:text-teal-800"
-                onClick={() => setIsOpen(false)}
-              >
-                Pricing
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/testimonial"
-                className="hover:text-teal-800"
-                onClick={() => setIsOpen(false)}
-              >
-                Testimonial
-              </Link>
-            </li>
-          </ul>
+      {/* Contact Form Popup (Same Page) */}
+      {isFormVisible && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96 relative">
+            <button
+              className="absolute top-3 right-3 text-gray-600 hover:text-red-500"
+              onClick={() => setIsFormVisible(false)} // Close popup
+            >
+              <X size={24} />
+            </button>
+            <ContactForm />
+          </div>
         </div>
       )}
-    </nav>
+    </>
   );
 }
