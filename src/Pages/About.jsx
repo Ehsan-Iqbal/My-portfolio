@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
-import about from "../assets/images/aboutimage.jpg";
+import about from "../assets/Images/aboutimage.jpg";
 import { statsData, Data } from "../Components/utills/const";
 
 export default function About() {
