@@ -7,7 +7,7 @@ export default function Home() {
       <div className="w-full md:w-5/12 max-w-lg text-center md:text-left">
         {/* Main Heading */}
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-          Hey! I am a Web Developer
+          Hey! I am a Web Developer.
         </h2>
         {/* Short Description */}
         <p className="mt-4 text-gray-700 text-md sm:text-md">
