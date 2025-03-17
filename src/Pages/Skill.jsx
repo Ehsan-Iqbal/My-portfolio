@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
-import skill from "../assets/images/christopher-gower-m_HRfLhgABo-unsplash.jpg";
+import skill from "../assets/Images/christopher-gower-m_HRfLhgABo-unsplash.jpg";
 import { defaultSkills } from "../Components/utills/const"; 
 
 const Skills = () => {
